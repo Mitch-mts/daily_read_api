@@ -67,6 +67,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>daily-read</finalName>
 	</build>
 	<repositories>
 		<repository>

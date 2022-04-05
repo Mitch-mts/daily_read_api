@@ -1,4 +1,5 @@
 FROM openjdk:11
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+RUN echo "Africa/Harare" > /etc/timezone
+COPY "./target/daily-read.jar" .
+# Run the jar
+ENTRYPOINT ["java", "-jar", "daily-read.jar"]
