@@ -3,7 +3,6 @@ package mts.mtech.dailyread.service;
 import java.time.LocalDate;
 import mts.mtech.dailyread.api.ApiResponse;
 import mts.mtech.dailyread.domain.DailyRead;
-import mts.mtech.dailyread.persistence.DailyReadRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class DailyReadServiceImpl implements DailyReadService{
   private final Logger logger = LoggerFactory.getLogger(DailyReadServiceImpl.class);
-  private final DailyReadRepository dailyReadRepository;
   private RestTemplate restTemplate = new RestTemplate();
   private final SaveVerseService saveVerseService;
 
@@ -27,8 +25,7 @@ public class DailyReadServiceImpl implements DailyReadService{
   @Value("${daily-read.random-verse}")
   String randomVerse;
 
-  public DailyReadServiceImpl(DailyReadRepository dailyReadRepository, SaveVerseService saveVerseService) {
-    this.dailyReadRepository = dailyReadRepository;
+  public DailyReadServiceImpl(SaveVerseService saveVerseService) {
     this.saveVerseService = saveVerseService;
   }
 
@@ -62,7 +59,8 @@ public class DailyReadServiceImpl implements DailyReadService{
       return dailyRead;
 
     } catch (Exception e) {
-      throw new IllegalStateException("Failed to retrieve bible verse:{}", e);
+      logger.error("failed to retrieve verse because: {}", e.getMessage());
+      throw new IllegalStateException("Failed to retrieve bible verse");
     }
   }
 

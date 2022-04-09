@@ -1,5 +1,5 @@
-FROM openjdk:11
+FROM openjdk:11:alpine-jre
 RUN echo "Africa/Harare" > /etc/timezone
-COPY "./target/daily-read.jar" .
+ADD target/daily-read.jar app.jar
 # Run the jar
-ENTRYPOINT ["java", "-jar", "daily-read.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  app:
+    container_name: daily_read
+    image: daily-read:latest
+    build: ./
+    ports:
+      - "8069:8069"
+    depends_on:
+      - postgresqldb
+  postgresqldb:
+    image: postgres:14.2-alpine3.15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=daily_read
