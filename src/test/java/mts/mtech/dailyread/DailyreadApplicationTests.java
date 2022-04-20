@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
 import mts.mtech.dailyread.domain.DailyRead;
+import mts.mtech.dailyread.exceptions.SystemErrorException;
 import mts.mtech.dailyread.persistence.DailyReadRepository;
 import mts.mtech.dailyread.service.DailyReadServiceImpl;
 import mts.mtech.dailyread.service.SaveVerseService;
@@ -56,12 +57,21 @@ class DailyreadApplicationTests {
 	}
 
 	@Test
-	@DisplayName("will throw exception when failed to get verse")
-	void willThrowExceptionWhenFailedToGetVerse() {
+	@DisplayName("will throw exception when failed to get random verse")
+	void willThrowExceptionWhenFailedToGetRandomVerse() {
 		// then
 		assertThatThrownBy(() -> underTest.getRandomVerse())
-				.isInstanceOf(IllegalStateException.class)
-				.hasMessageContaining("Failed to retrieve bible verse");
+				.isInstanceOf(SystemErrorException.class)
+				.hasMessageContaining("Bible Verse service unavailable at the moment");
+	}
+
+	@Test
+	@DisplayName("will throw exception when failed to get daily verse")
+	void willThrowExceptionWhenFailedToGetDailyVerse() {
+		// then
+		assertThatThrownBy(() -> underTest.getDailyVerse())
+				.isInstanceOf(SystemErrorException.class)
+				.hasMessageContaining("Bible Verse service unavailable at the moment");
 	}
 
 	@Test

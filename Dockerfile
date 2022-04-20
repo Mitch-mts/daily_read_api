@@ -1,4 +1,4 @@
-FROM openjdk:11:alpine-jre
+FROM openjdk:11
 RUN echo "Africa/Harare" > /etc/timezone
 ADD target/daily-read.jar app.jar
 # Run the jar

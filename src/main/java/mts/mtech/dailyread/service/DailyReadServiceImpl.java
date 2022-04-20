@@ -3,6 +3,9 @@ package mts.mtech.dailyread.service;
 import java.time.LocalDate;
 import mts.mtech.dailyread.api.ApiResponse;
 import mts.mtech.dailyread.domain.DailyRead;
+import mts.mtech.dailyread.exceptions.RecordNotFoundException;
+import mts.mtech.dailyread.exceptions.SystemErrorException;
+import mts.mtech.dailyread.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,7 +49,7 @@ public class DailyReadServiceImpl implements DailyReadService{
       var result = call.getBody();
 
       if(result == null){
-        throw new IllegalStateException("Bible verse not found");
+        throw new RecordNotFoundException(Constants.NOT_FOUND);
       }
 
       DailyRead dailyRead = DailyRead.of(result.getContents().getVerse(),
@@ -59,8 +62,7 @@ public class DailyReadServiceImpl implements DailyReadService{
       return dailyRead;
 
     } catch (Exception e) {
-      logger.error("failed to retrieve verse because: {}", e.getMessage());
-      throw new IllegalStateException("Failed to retrieve bible verse");
+      throw new SystemErrorException(Constants.SERVICE_UNAVAILABLE);
     }
   }
 
