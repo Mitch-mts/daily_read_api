@@ -13,33 +13,34 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import mts.mtech.dailyread.domain.enums.Status;
 
 /**
  * @author Mitchell Tawanda Severa
- * @created 31/03/2022 - 8:45 PM
+ * @created 27/04/2022 - 9:19 PM
  */
 @Entity
 @Table
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
-public class DailyRead implements Serializable {
+@ToString
+@Data
+public class Users implements Serializable {
   @Id
   @GeneratedValue(
       generator = "daily_read_sequence",
       strategy = GenerationType.SEQUENCE)
   private Long id;
   @Column
-  private String verse;
+  private String email;
   @Column
-  private String number;
+  private String firstname;
   @Column
-  private String chapter;
+  private String lastname;
   @Column
-  private String book;
-  @Column
-  private String testament;
+  private Status status;
   @Column
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private LocalDate dateCreated;

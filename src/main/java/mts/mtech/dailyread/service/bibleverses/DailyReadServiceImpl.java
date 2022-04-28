@@ -1,10 +1,10 @@
-package mts.mtech.dailyread.service;
+package mts.mtech.dailyread.service.bibleverses;
 
-import java.time.LocalDate;
 import mts.mtech.dailyread.api.ApiResponse;
 import mts.mtech.dailyread.domain.DailyRead;
 import mts.mtech.dailyread.exceptions.RecordNotFoundException;
 import mts.mtech.dailyread.exceptions.SystemErrorException;
+import mts.mtech.dailyread.service.save.SaveVerseService;
 import mts.mtech.dailyread.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,25 +49,22 @@ public class DailyReadServiceImpl implements DailyReadService{
       var result = call.getBody();
 
       if(result == null){
-        throw new RecordNotFoundException(Constants.NOT_FOUND);
+        throw new RecordNotFoundException(Constants.VERSE_NOT_FOUND);
       }
 
-      DailyRead dailyRead = DailyRead.of(result.getContents().getVerse(),
-                                        result.getContents().getNumber(),
-                                        result.getContents().getChapter(),
-                                        result.getContents().getBook(),
-                                        result.getContents().getTestament(),
-                                        LocalDate.now());
-      saveVerse(dailyRead);
+      DailyRead dailyRead = DailyRead.builder()
+                                      .verse(result.getContents().getVerse())
+                                      .book(result.getContents().getBook())
+                                      .chapter(result.getContents().getChapter())
+                                      .number(result.getContents().getNumber())
+                                      .testament(result.getContents().getTestament())
+                                      .build();
+      saveVerseService.save(dailyRead);
       return dailyRead;
 
     } catch (Exception e) {
       throw new SystemErrorException(Constants.SERVICE_UNAVAILABLE);
     }
-  }
-
-  private void saveVerse(DailyRead dailyRead){
-    saveVerseService.save(dailyRead);
   }
 
 }

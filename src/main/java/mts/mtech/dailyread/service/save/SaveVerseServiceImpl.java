@@ -1,4 +1,4 @@
-package mts.mtech.dailyread.service;
+package mts.mtech.dailyread.service.save;
 
 import mts.mtech.dailyread.domain.DailyRead;
 import mts.mtech.dailyread.persistence.DailyReadRepository;

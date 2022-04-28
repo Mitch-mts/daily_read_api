@@ -1,7 +1,7 @@
 package mts.mtech.dailyread.controller;
 
 import mts.mtech.dailyread.controller.dto.DailyReadDto;
-import mts.mtech.dailyread.service.DailyReadService;
+import mts.mtech.dailyread.service.bibleverses.DailyReadService;
 import mts.mtech.dailyread.utils.Constants;
 import mts.mtech.dailyread.utils.Response;
 import org.springframework.web.bind.annotation.GetMapping;

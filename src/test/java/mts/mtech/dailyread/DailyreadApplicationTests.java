@@ -8,11 +8,10 @@ import java.time.LocalDate;
 import mts.mtech.dailyread.domain.DailyRead;
 import mts.mtech.dailyread.exceptions.SystemErrorException;
 import mts.mtech.dailyread.persistence.DailyReadRepository;
-import mts.mtech.dailyread.service.DailyReadServiceImpl;
-import mts.mtech.dailyread.service.SaveVerseService;
-import mts.mtech.dailyread.service.SaveVerseServiceImpl;
+import mts.mtech.dailyread.service.bibleverses.DailyReadServiceImpl;
+import mts.mtech.dailyread.service.save.SaveVerseService;
+import mts.mtech.dailyread.service.save.SaveVerseServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,15 +35,16 @@ class DailyreadApplicationTests {
 	}
 
 	@Test
-	@DisplayName("should save verse")
-	void shouldSaveVerse() {
+	@DisplayName("should save bible verse")
+	void shouldSaveBibleVerse() {
 		// given
-		DailyRead dailyRead = DailyRead.of("test",
-																			"1",
-																			"1",
-																			"test_book",
-																			"new",
-																			LocalDate.now());
+		DailyRead dailyRead = DailyRead.builder()
+																		.verse("Jesus wept")
+																		.testament("New Testament")
+																		.chapter("35")
+																		.number("5")
+																		.dateCreated(LocalDate.now())
+																		.build();
 		// when
 		underTest1.save(dailyRead);
 
@@ -72,15 +72,5 @@ class DailyreadApplicationTests {
 		assertThatThrownBy(() -> underTest.getDailyVerse())
 				.isInstanceOf(SystemErrorException.class)
 				.hasMessageContaining("Bible Verse service unavailable at the moment");
-	}
-
-	@Test
-	@DisplayName("should get random verse")
-	@Disabled
-	void shouldGetRandomVerse() {
-		// when
-		var result = underTest.getRandomVerse();
-		// then
-		assertThat(result).isNotNull();
 	}
 }
