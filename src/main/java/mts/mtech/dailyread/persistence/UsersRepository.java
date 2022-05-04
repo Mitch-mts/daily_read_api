@@ -1,6 +1,8 @@
 package mts.mtech.dailyread.persistence;
 
+import java.util.Optional;
 import mts.mtech.dailyread.domain.Users;
+import mts.mtech.dailyread.domain.enums.Status;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +13,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsersRepository extends BaseRepository<Users>,
     JpaSpecificationExecutor<Users> {
-
+  boolean existsByEmail(String email);
+  Optional<Users> findByIdAndStatus(Long id, Status status);
 }

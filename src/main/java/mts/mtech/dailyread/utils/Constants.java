@@ -13,7 +13,11 @@ public interface Constants {
     String SERVICE_UNAVAILABLE = "Bible Verse service unavailable at the moment";
     String VERSE_NOT_FOUND = "Bible verse not found";
     String NOT_FOUND = "Record not found";
+    String NOT_RECORDS = "No records available";
     String SAVE_FAILED = "Failed to save bible verse";
     String BIBLE_READING = "Bible Reading";
     String FROM_PERSONAL = "MTech Innovations";
+    String DELETED = "Record deleted successfully";
+    String UPDATED = "Record updated successfully";
+    String EMAIL_EXISTS = "Email already exists";
 }

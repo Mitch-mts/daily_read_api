@@ -2,6 +2,7 @@ package mts.mtech.dailyread.service.users;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 import mts.mtech.dailyread.domain.Users;
 import mts.mtech.dailyread.domain.enums.Status;
 import mts.mtech.dailyread.exceptions.InvalidRequestException;
@@ -34,11 +35,15 @@ public class UserServiceImpl implements UserService{
 
   @Override
   public Users createUser(UserRequest userRequest) {
+    if(usersRepository.existsByEmail(userRequest.getEmail()))
+      throw new InvalidRequestException(Constants.EMAIL_EXISTS);
+
     Users users = Users.builder()
                         .firstname(userRequest.getFirstname())
                         .lastname(userRequest.getLastname())
                         .email(userRequest.getEmail())
                         .dateCreated(LocalDate.now())
+                        .status(Status.ACTIVE)
                         .build();
     return saveUserService.save(users);
   }
@@ -63,17 +68,40 @@ public class UserServiceImpl implements UserService{
 
   @Override
   public Users getUserById(Long id) {
-    return usersRepository.findById(id)
-        .orElseThrow(()-> new InvalidRequestException(Constants.NOT_FOUND));
+    return usersRepository.findByIdAndStatus(id, Status.ACTIVE)
+        .orElseThrow(()-> new RecordNotFoundException(Constants.NOT_FOUND));
   }
 
   @Override
   public List<Users> getUserList() {
-    return usersRepository.findAll();
+    try{
+      return usersRepository.findAll()
+          .stream()
+          .filter(users -> users.getStatus().equals(Status.ACTIVE))
+          .collect(Collectors.toList());
+    }catch (Exception e){
+      throw new RecordNotFoundException(Constants.NOT_RECORDS);
+    }
   }
 
   @Override
   public Page<Users> getAllUsers(Pageable pageable) {
     return usersRepository.findAll(pageable);
+  }
+
+  @Override
+  public Users activateDeactivateUser(Long id) {
+    Users users = usersRepository.findById(id)
+        .orElseThrow(()-> new RecordNotFoundException(Constants.NOT_FOUND));
+    switch (users.getStatus()){
+      case ACTIVE:
+        users.setStatus(Status.SUSPENDED);
+        break;
+      case BLOCKED:
+      case SUSPENDED:
+        users.setStatus(Status.ACTIVE);
+        break;
+    }
+    return usersRepository.save(users);
   }
 }

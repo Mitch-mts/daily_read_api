@@ -17,5 +17,6 @@ public interface UserService {
   Users getUserById(Long id);
   List<Users> getUserList();
   Page<Users> getAllUsers(Pageable pageable);
+  Users activateDeactivateUser(Long id);
 
 }

@@ -7,5 +7,7 @@ package mts.mtech.dailyread.domain.enums;
 
 public enum Status {
   ACTIVE,
-  INACTIVE
+  INACTIVE,
+  SUSPENDED,
+  BLOCKED
 }
