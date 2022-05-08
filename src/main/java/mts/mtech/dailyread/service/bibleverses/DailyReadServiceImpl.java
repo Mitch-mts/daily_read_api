@@ -2,10 +2,10 @@ package mts.mtech.dailyread.service.bibleverses;
 
 import mts.mtech.dailyread.api.ApiResponse;
 import mts.mtech.dailyread.domain.DailyRead;
-import mts.mtech.dailyread.exceptions.RecordNotFoundException;
-import mts.mtech.dailyread.exceptions.SystemErrorException;
 import mts.mtech.dailyread.service.save.SaveVerseService;
 import mts.mtech.dailyread.utils.Constants;
+import mts.mtech.errorhandling.exception.RecordNotFoundException;
+import mts.mtech.errorhandling.exception.SystemErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,10 +53,10 @@ public class DailyReadServiceImpl implements DailyReadService{
       }
 
       DailyRead dailyRead = DailyRead.builder()
-                                      .verse(result.getContents().getVerse())
+                                      .reading(result.getContents().getVerse())
                                       .book(result.getContents().getBook())
                                       .chapter(result.getContents().getChapter())
-                                      .number(result.getContents().getNumber())
+                                      .verse(result.getContents().getNumber())
                                       .testament(result.getContents().getTestament())
                                       .build();
       saveVerseService.save(dailyRead);

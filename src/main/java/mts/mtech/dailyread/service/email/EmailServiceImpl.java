@@ -34,7 +34,7 @@ public class EmailServiceImpl implements EmailService {
         emailBody = "Hi " + fullname
                 + "Today's bible reading comes from  "
                 + emailRequest.getDailyRead().getBook() + " chapter " + emailRequest.getDailyRead().getChapter()
-         + " verse " + emailRequest.getDailyRead().getNumber() + " \n it reads \n" + emailRequest.getDailyRead().getVerse();
+         + " verse " + emailRequest.getDailyRead().getVerse() + " \n it reads \n" + emailRequest.getDailyRead().getReading();
 
         String emailSubject = Constants.BIBLE_READING;
         Notification notification = Notification.builder()

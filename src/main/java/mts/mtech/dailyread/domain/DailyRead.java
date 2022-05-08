@@ -31,9 +31,9 @@ public class DailyRead implements Serializable {
       strategy = GenerationType.SEQUENCE)
   private Long id;
   @Column
-  private String verse;
+  private String reading;
   @Column
-  private String number;
+  private String verse;
   @Column
   private String chapter;
   @Column

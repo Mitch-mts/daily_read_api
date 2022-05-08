@@ -1,7 +1,6 @@
 package mts.mtech.dailyread.persistence;
 
 
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

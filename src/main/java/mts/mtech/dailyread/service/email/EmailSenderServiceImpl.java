@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import mts.mtech.dailyread.exceptions.SystemErrorException;
+import mts.mtech.errorhandling.exception.SystemErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

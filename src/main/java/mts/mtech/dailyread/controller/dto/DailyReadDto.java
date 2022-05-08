@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import mts.mtech.dailyread.domain.DailyRead;
 
 /**
@@ -14,21 +15,22 @@ import mts.mtech.dailyread.domain.DailyRead;
 @NoArgsConstructor
 @Data
 @Builder
+@ToString
 public class DailyReadDto {
   private Long id;
+  private String reading;
   private String verse;
-  private String number;
   private String chapter;
   private String book;
   private String testament;
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private LocalDate dateCreated;
 
-  private DailyReadDto(Long id, String verse, String number, String chapter, String book,
+  private DailyReadDto(Long id, String reading, String verse, String chapter, String book,
       String testament, LocalDate dateCreated) {
     this.id = id;
+    this.reading = reading;
     this.verse = verse;
-    this.number = number;
     this.chapter = chapter;
     this.book = book;
     this.testament = testament;
@@ -37,8 +39,8 @@ public class DailyReadDto {
 
   public static DailyReadDto of(DailyRead dailyRead) {
     return new DailyReadDto(dailyRead.getId(),
+        dailyRead.getReading(),
         dailyRead.getVerse(),
-        dailyRead.getNumber(),
         dailyRead.getChapter(),
         dailyRead.getBook(),
         dailyRead.getTestament(),

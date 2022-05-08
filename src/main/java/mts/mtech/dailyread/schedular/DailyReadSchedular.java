@@ -29,6 +29,7 @@ public class DailyReadSchedular {
 
   @Scheduled(cron = "0 0 6,12,20 ? * * *")
   public void sendDailyBibleReading(){
+    logger.info("sending daily bible reading");
     userService.getUserList().stream().forEach(users -> {
       EmailRequest emailRequest = EmailRequest.builder()
           .email(users.getEmail())
