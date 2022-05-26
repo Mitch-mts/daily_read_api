@@ -1,6 +1,6 @@
 package mts.mtech.dailyread.service.users.update;
 
-import mts.mtech.dailyread.domain.Users;
+import mts.mtech.dailyread.domain.UserAccount;
 import mts.mtech.dailyread.service.users.UserRequest;
 
 /**
@@ -9,5 +9,5 @@ import mts.mtech.dailyread.service.users.UserRequest;
  */
 
 public interface UpdateUserService {
-  Users updateUser(UserRequest userRequest, Long id);
+  UserAccount updateUser(UserRequest userRequest, Long id);
 }

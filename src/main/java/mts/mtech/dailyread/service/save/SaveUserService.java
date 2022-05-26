@@ -1,6 +1,6 @@
 package mts.mtech.dailyread.service.save;
 
-import mts.mtech.dailyread.domain.Users;
+import mts.mtech.dailyread.domain.UserAccount;
 
 /**
  * @author Mitchell Tawanda Severa
@@ -8,5 +8,5 @@ import mts.mtech.dailyread.domain.Users;
  */
 
 public interface SaveUserService {
-  Users save(Users users);
+  UserAccount save(UserAccount userAccount);
 }

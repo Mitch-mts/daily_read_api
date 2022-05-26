@@ -1,7 +1,7 @@
 package mts.mtech.dailyread.service.save;
 
-import mts.mtech.dailyread.domain.Users;
-import mts.mtech.dailyread.persistence.UsersRepository;
+import mts.mtech.dailyread.domain.UserAccount;
+import mts.mtech.dailyread.persistence.UserAccountRepository;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SaveUserServiceImpl implements SaveUserService{
-  private final UsersRepository usersRepository;
+  private final UserAccountRepository userAccountRepository;
 
-  public SaveUserServiceImpl(UsersRepository usersRepository) {
-    this.usersRepository = usersRepository;
+  public SaveUserServiceImpl(UserAccountRepository userAccountRepository) {
+    this.userAccountRepository = userAccountRepository;
   }
 
   @Override
-  public Users save(Users users) {
-    return usersRepository.save(users);
+  public UserAccount save(UserAccount userAccount) {
+    return userAccountRepository.save(userAccount);
   }
 }

@@ -1,10 +1,11 @@
 package mts.mtech.dailyread.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import mts.mtech.dailyread.controller.dto.MessageResponse;
-import mts.mtech.dailyread.domain.Users;
+import mts.mtech.dailyread.controller.dto.UserAccountDto;
 import mts.mtech.dailyread.service.users.UserRequest;
 import mts.mtech.dailyread.service.users.UserService;
 import mts.mtech.dailyread.service.users.create.CreateUserService;
@@ -13,6 +14,7 @@ import mts.mtech.dailyread.service.users.view.ViewUserService;
 import mts.mtech.dailyread.utils.Constants;
 import mts.mtech.dailyread.utils.Response;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,36 +51,42 @@ public class UsersRestController {
 
 
   @PostMapping
-  public Response<Users> create(@Valid @RequestBody UserRequest userRequest){
+  public Response<UserAccountDto> create(@Valid @RequestBody UserRequest userRequest){
     log.info("userRequest: {}", userRequest);
-    return new Response<Users>().buildSuccessResponse(Constants.SUCCESS,
-        createUserService.createUser(userRequest));
+    return new Response<UserAccountDto>().buildSuccessResponse(Constants.SUCCESS,
+        UserAccountDto.of(createUserService.createUser(userRequest)));
   }
 
   @PutMapping("/{id}")
-  public Response<Users> update(@PathVariable Long id, UserRequest userRequest){
+  public Response<UserAccountDto> update(@PathVariable Long id, UserRequest userRequest){
     log.info("id: {}, userRequest: {}", id, userRequest);
-    return new Response<Users>().buildSuccessResponse(Constants.UPDATED,
-        updateUserService.updateUser(userRequest, id));
+    return new Response<UserAccountDto>().buildSuccessResponse(Constants.UPDATED,
+        UserAccountDto.of(updateUserService.updateUser(userRequest, id)));
   }
 
   @GetMapping
-  public Response<Page<Users>> getAll(@PageableDefault Pageable pageable){
+  public Response<Page<UserAccountDto>> getAll(@PageableDefault Pageable pageable){
     log.info("pagaeble:{}", pageable);
-    return  new Response<Page<Users>>().buildSuccessResponse(Constants.SUCCESS,
-        viewUserService.getAllUsers(pageable));
+    var userPage = viewUserService.getAllUsers(pageable)
+                                                .stream()
+                                                .map(UserAccountDto::of)
+                                                .collect(
+                                                Collectors.toList());
+
+    return  new Response<Page<UserAccountDto>>().buildSuccessResponse(Constants.SUCCESS,
+        new PageImpl<>(userPage));
   }
 
   @GetMapping("/{id}")
-  public Response<Users> getById(@PathVariable Long id){
-    return new Response<Users>().buildSuccessResponse(Constants.SUCCESS,
-        viewUserService.getUserById(id));
+  public Response<UserAccountDto> getById(@PathVariable Long id){
+    return new Response<UserAccountDto>().buildSuccessResponse(Constants.SUCCESS,
+        UserAccountDto.of(viewUserService.getUserById(id)));
   }
 
   @GetMapping("/list")
-  public Response<List<Users>> getList(){
-    return new Response<List<Users>>().buildSuccessResponse(Constants.SUCCESS,
-        viewUserService.getUserList());
+  public Response<List<UserAccountDto>> getList(){
+    return new Response<List<UserAccountDto>>().buildSuccessResponse(Constants.SUCCESS,
+        UserAccountDto.of(viewUserService.getUserList()));
   }
 
   @DeleteMapping("{id}")
@@ -88,10 +96,10 @@ public class UsersRestController {
   }
 
   @PutMapping("activate-deactivate/{id}")
-  public Response<Users> activateDeactivate(@PathVariable Long id){
+  public Response<UserAccountDto> activateDeactivate(@PathVariable Long id){
     log.info("activating/deactivating : {}", id);
-    return new Response<Users>().buildSuccessResponse(Constants.SUCCESS,
-        userService.activateDeactivateUser(id));
+    return new Response<UserAccountDto>().buildSuccessResponse(Constants.SUCCESS,
+        UserAccountDto.of(userService.activateDeactivateUser(id)));
   }
 
 }

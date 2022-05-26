@@ -1,8 +1,8 @@
 package mts.mtech.dailyread.service.users;
 
-import mts.mtech.dailyread.domain.Users;
+import mts.mtech.dailyread.domain.UserAccount;
 import mts.mtech.dailyread.domain.enums.Status;
-import mts.mtech.dailyread.persistence.UsersRepository;
+import mts.mtech.dailyread.persistence.UserAccountRepository;
 import mts.mtech.dailyread.service.save.SaveUserService;
 import mts.mtech.dailyread.utils.Constants;
 import mts.mtech.errorhandling.exception.RecordNotFoundException;
@@ -14,18 +14,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl implements UserService{
-  private final UsersRepository usersRepository;
+  private final UserAccountRepository userAccountRepository;
   private final SaveUserService saveUserService;
 
-  public UserServiceImpl(UsersRepository usersRepository,
+  public UserServiceImpl(UserAccountRepository userAccountRepository,
       SaveUserService saveUserService) {
-    this.usersRepository = usersRepository;
+    this.userAccountRepository = userAccountRepository;
     this.saveUserService = saveUserService;
   }
 
   @Override
-  public Users deleteUser(Long id) {
-    var user = usersRepository.findById(id)
+  public UserAccount deleteUser(Long id) {
+    var user = userAccountRepository.findById(id)
         .orElseThrow(()-> new RecordNotFoundException(Constants.NOT_FOUND));
     user.setStatus(Status.INACTIVE);
     return saveUserService.save(user);
@@ -33,18 +33,18 @@ public class UserServiceImpl implements UserService{
 
 
   @Override
-  public Users activateDeactivateUser(Long id) {
-    Users users = usersRepository.findById(id)
+  public UserAccount activateDeactivateUser(Long id) {
+    UserAccount userAccount = userAccountRepository.findById(id)
         .orElseThrow(()-> new RecordNotFoundException(Constants.NOT_FOUND));
-    switch (users.getStatus()){
+    switch (userAccount.getStatus()){
       case ACTIVE:
-        users.setStatus(Status.SUSPENDED);
+        userAccount.setStatus(Status.SUSPENDED);
         break;
       case BLOCKED:
       case SUSPENDED:
-        users.setStatus(Status.ACTIVE);
+        userAccount.setStatus(Status.ACTIVE);
         break;
     }
-    return usersRepository.save(users);
+    return userAccountRepository.save(userAccount);
   }
 }

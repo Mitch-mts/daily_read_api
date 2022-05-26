@@ -1,7 +1,7 @@
 package mts.mtech.dailyread.service.users.update;
 
-import mts.mtech.dailyread.domain.Users;
-import mts.mtech.dailyread.persistence.UsersRepository;
+import mts.mtech.dailyread.domain.UserAccount;
+import mts.mtech.dailyread.persistence.UserAccountRepository;
 import mts.mtech.dailyread.service.save.SaveUserService;
 import mts.mtech.dailyread.service.users.UserRequest;
 import mts.mtech.dailyread.utils.Constants;
@@ -14,18 +14,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UpdateUserServiceImpl implements UpdateUserService{
-  private final UsersRepository usersRepository;
+  private final UserAccountRepository userAccountRepository;
   private final SaveUserService saveUserService;
 
-  public UpdateUserServiceImpl(UsersRepository usersRepository,
+  public UpdateUserServiceImpl(UserAccountRepository userAccountRepository,
       SaveUserService saveUserService) {
-    this.usersRepository = usersRepository;
+    this.userAccountRepository = userAccountRepository;
     this.saveUserService = saveUserService;
   }
 
   @Override
-  public Users updateUser(UserRequest userRequest, Long id) {
-    var users = usersRepository.findById(id)
+  public UserAccount updateUser(UserRequest userRequest, Long id) {
+    var users = userAccountRepository.findById(id)
         .orElseThrow(()-> new RecordNotFoundException(Constants.NOT_FOUND));
     users.setEmail(userRequest.getEmail());
     users.setFirstname(userRequest.getFirstname());

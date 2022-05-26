@@ -1,6 +1,6 @@
 package mts.mtech.dailyread.service.users;
 
-import mts.mtech.dailyread.domain.Users;
+import mts.mtech.dailyread.domain.UserAccount;
 
 /**
  * @author Mitchell Tawanda Severa
@@ -8,6 +8,6 @@ import mts.mtech.dailyread.domain.Users;
  */
 
 public interface UserService {
-  Users deleteUser(Long id);
-  Users activateDeactivateUser(Long id);
+  UserAccount deleteUser(Long id);
+  UserAccount activateDeactivateUser(Long id);
 }

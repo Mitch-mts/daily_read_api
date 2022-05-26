@@ -33,7 +33,7 @@ import org.hibernate.Hibernate;
 @ToString
 @Getter
 @Setter
-public class Users implements Serializable {
+public class UserAccount implements Serializable {
   @Id
   @GeneratedValue(
       generator = "daily_read_sequence",
@@ -60,8 +60,8 @@ public class Users implements Serializable {
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
       return false;
     }
-    Users users = (Users) o;
-    return id != null && Objects.equals(id, users.id);
+    UserAccount userAccount = (UserAccount) o;
+    return id != null && Objects.equals(id, userAccount.id);
   }
 
   @Override

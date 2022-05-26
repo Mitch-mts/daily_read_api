@@ -1,7 +1,7 @@
 package mts.mtech.dailyread.service.users.view;
 
 import java.util.List;
-import mts.mtech.dailyread.domain.Users;
+import mts.mtech.dailyread.domain.UserAccount;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
  */
 
 public interface ViewUserService {
-  Users getUserById(Long id);
-  List<Users> getUserList();
-  Page<Users> getAllUsers(Pageable pageable);
+  UserAccount getUserById(Long id);
+  List<UserAccount> getUserList();
+  Page<UserAccount> getAllUsers(Pageable pageable);
 }

@@ -7,7 +7,7 @@ services:
       context: .
     ports:
       - "8069:8069"
-    container_name: app
+    container_name: daily_read_app
     depends_on:
       - db
     environment:
@@ -18,7 +18,7 @@ services:
 
   db:
     image: 'postgres:13.1-alpine'
-    container_name: db
+    container_name: daily_read_db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=BigMitch@123

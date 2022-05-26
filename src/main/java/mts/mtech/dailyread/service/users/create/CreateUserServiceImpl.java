@@ -1,9 +1,9 @@
 package mts.mtech.dailyread.service.users.create;
 
 import java.time.LocalDate;
-import mts.mtech.dailyread.domain.Users;
+import mts.mtech.dailyread.domain.UserAccount;
 import mts.mtech.dailyread.domain.enums.Status;
-import mts.mtech.dailyread.persistence.UsersRepository;
+import mts.mtech.dailyread.persistence.UserAccountRepository;
 import mts.mtech.dailyread.service.save.SaveUserService;
 import mts.mtech.dailyread.service.users.UserRequest;
 import mts.mtech.dailyread.utils.Constants;
@@ -16,28 +16,28 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CreateUserServiceImpl implements CreateUserService{
-  private final UsersRepository usersRepository;
+  private final UserAccountRepository userAccountRepository;
   private final SaveUserService saveUserService;
 
-  public CreateUserServiceImpl(UsersRepository usersRepository,
+  public CreateUserServiceImpl(UserAccountRepository userAccountRepository,
       SaveUserService saveUserService) {
-    this.usersRepository = usersRepository;
+    this.userAccountRepository = userAccountRepository;
     this.saveUserService = saveUserService;
   }
 
   @Override
-  public Users createUser(UserRequest userRequest) {
-    if(usersRepository.existsByEmail(userRequest.getEmail()))
+  public UserAccount createUser(UserRequest userRequest) {
+    if(userAccountRepository.existsByEmail(userRequest.getEmail()))
       throw new InvalidRequestException(Constants.EMAIL_EXISTS);
 
-    Users users = Users.builder()
+    UserAccount userAccount = UserAccount.builder()
         .firstname(userRequest.getFirstname())
         .lastname(userRequest.getLastname())
         .email(userRequest.getEmail())
         .dateCreated(LocalDate.now())
         .status(Status.ACTIVE)
         .build();
-    return saveUserService.save(users);
+    return saveUserService.save(userAccount);
   }
 
 }
