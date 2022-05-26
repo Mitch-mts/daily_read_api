@@ -45,7 +45,11 @@ public class ViewUserServiceImpl implements ViewUserService {
 
   @Override
   public Page<UserAccount> getAllUsers(Pageable pageable) {
-    return userAccountRepository.findAll(pageable);
+    try{
+      return userAccountRepository.findAll(pageable);
+    }catch (Exception e){
+      throw new RecordNotFoundException(Constants.NOT_FOUND);
+    }
   }
 
 }
