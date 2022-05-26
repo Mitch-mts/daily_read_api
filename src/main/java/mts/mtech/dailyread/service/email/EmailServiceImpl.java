@@ -29,18 +29,17 @@ public class EmailServiceImpl implements EmailService {
     public void sendEmail(EmailRequest emailRequest) {
         logger.info("Sending email {}", emailRequest);
         String emailBody;
-        String fullname = emailRequest.getFirstname() + " " + emailRequest.getLastname();
+        String name = emailRequest.getFirstname() + " " + emailRequest.getLastname();
 
-        emailBody = "Hi " + fullname
-                + "Today's bible reading comes from  "
-                + emailRequest.getDailyRead().getBook() + " chapter " + emailRequest.getDailyRead().getChapter()
-         + " verse " + emailRequest.getDailyRead().getVerse() + " \n it reads \n" + emailRequest.getDailyRead().getReading();
+        emailBody = "Hi " + name
+                + "Today's bible reading comes from \n"
+                + emailRequest.getDailyRead().getBook() + " \n chapter " + emailRequest.getDailyRead().getChapter()
+         + " \n verse " + emailRequest.getDailyRead().getVerse() + " \n it reads \n" + emailRequest.getDailyRead().getReading();
 
-        String emailSubject = Constants.BIBLE_READING;
         Notification notification = Notification.builder()
                 .setBody(emailBody)
                 .setMedium(Medium.EMAIL)
-                .setSubject(emailSubject)
+                .setSubject(Constants.BIBLE_READING)
                 .setFrom(emailSender)
                 .setFromPersonal(Constants.FROM_PERSONAL)
                 .setRecipients(new HashSet<>(Collections.singletonList(emailRequest.getEmail())))

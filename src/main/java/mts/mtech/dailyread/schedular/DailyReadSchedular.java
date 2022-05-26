@@ -1,11 +1,10 @@
 package mts.mtech.dailyread.schedular;
 
+import lombok.extern.slf4j.Slf4j;
 import mts.mtech.dailyread.service.bibleverses.DailyReadService;
 import mts.mtech.dailyread.service.email.EmailRequest;
 import mts.mtech.dailyread.service.email.EmailService;
-import mts.mtech.dailyread.service.users.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import mts.mtech.dailyread.service.users.view.ViewUserService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -14,23 +13,23 @@ import org.springframework.stereotype.Component;
  * @created 27/04/2022 - 9:10 PM
  */
 @Component
+@Slf4j
 public class DailyReadSchedular {
-  private final Logger logger = LoggerFactory.getLogger(DailyReadSchedular.class);
   private final DailyReadService dailyReadService;
-  private final UserService userService;
+  private final ViewUserService viewUserService;
   private final EmailService emailService;
 
   public DailyReadSchedular(DailyReadService dailyReadService,
-      UserService userService, EmailService emailService) {
+      ViewUserService viewUserService, EmailService emailService) {
     this.dailyReadService = dailyReadService;
-    this.userService = userService;
+    this.viewUserService = viewUserService;
     this.emailService = emailService;
   }
 
   @Scheduled(cron = "0 0 6,12,20 ? * * *")
   public void sendDailyBibleReading(){
-    logger.info("sending daily bible reading");
-    userService.getUserList().stream().forEach(users -> {
+    log.info("sending daily bible reading");
+    viewUserService.getUserList().stream().forEach(users -> {
       EmailRequest emailRequest = EmailRequest.builder()
           .email(users.getEmail())
           .firstname(users.getFirstname())

@@ -1,18 +1,25 @@
-version: '3.8'
+version: '2'
+
 services:
   app:
-    container_name: daily_read
-    image: daily-read:latest
-    build: ./
+    image: 'daily-read:latest'
+    build:
+      context: .
     ports:
       - "8069:8069"
+    container_name: app
     depends_on:
-      - postgresqldb
-  postgresqldb:
-    image: postgres:14.2-alpine3.15
-    ports:
-      - "5433:5433"
+      - db
     environment:
-      - POSTGRES_PASSWORD=password
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/daily_read
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=BigMitch@123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
       - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=BigMitch@123
       - POSTGRES_DB=daily_read

@@ -2,8 +2,6 @@ package mts.mtech.dailyread.service.save;
 
 import mts.mtech.dailyread.domain.DailyRead;
 import mts.mtech.dailyread.persistence.DailyReadRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SaveVerseServiceImpl implements SaveVerseService{
-  private final Logger logger = LoggerFactory.getLogger(SaveVerseServiceImpl.class);
   private final DailyReadRepository dailyReadRepository;
 
   public SaveVerseServiceImpl(

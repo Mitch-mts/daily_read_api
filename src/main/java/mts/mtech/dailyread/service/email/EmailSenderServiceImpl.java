@@ -89,9 +89,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
                 mimeMessageHelper.setFrom(from);
             }
             mimeMessageHelper.setText(emailBody, true);
-        } catch (MessagingException e) {
-            throw new SystemErrorException(e.getMessage());
-        } catch (UnsupportedEncodingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             throw new SystemErrorException(e.getMessage());
         }
 

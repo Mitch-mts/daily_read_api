@@ -9,7 +9,6 @@ import java.io.Serializable;
  */
 
 public class Response<T> implements Serializable {
-
     private int statusCode;
     private boolean success;
     private String message;
