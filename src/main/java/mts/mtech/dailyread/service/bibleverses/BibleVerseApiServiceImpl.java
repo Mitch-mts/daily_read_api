@@ -29,21 +29,21 @@ public class BibleVerseApiServiceImpl implements BibleVerseApiService{
   @Override
   public DailyRead getVerse(String url){
     try {
-      ResponseEntity<ApiResponse> call = restTemplate.getForEntity(url, ApiResponse.class);
-      log.info("response:{}", call.getBody());
-      var result = call.getBody();
+      ResponseEntity<ApiResponse> response = restTemplate.getForEntity(url, ApiResponse.class);
+      log.info("response:{}", response.getBody());
+      var result = response.getBody();
 
       if(result == null){
         throw new RecordNotFoundException(Constants.VERSE_NOT_FOUND);
       }
 
       DailyRead dailyRead = DailyRead.builder()
-          .reading(result.getContents().getVerse())
-          .book(result.getContents().getBook())
-          .chapter(result.getContents().getChapter())
-          .verse(result.getContents().getNumber())
-          .testament(result.getContents().getTestament())
-          .build();
+                            .reading(result.getContents().getVerse())
+                            .book(result.getContents().getBook())
+                            .chapter(result.getContents().getChapter())
+                            .verse(result.getContents().getNumber())
+                            .testament(result.getContents().getTestament())
+                            .build();
       saveVerseService.save(dailyRead);
       return dailyRead;
 

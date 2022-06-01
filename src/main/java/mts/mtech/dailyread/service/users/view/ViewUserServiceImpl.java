@@ -46,8 +46,9 @@ public class ViewUserServiceImpl implements ViewUserService {
   @Override
   public Page<UserAccount> getAllUsers(Pageable pageable) {
     try{
-      return userAccountRepository.findAll(pageable);
+      return userAccountRepository.findAllByStatus(Status.ACTIVE, pageable);
     }catch (Exception e){
+      log.warn("warning:{}", e.getMessage());
       throw new RecordNotFoundException(Constants.NOT_FOUND);
     }
   }

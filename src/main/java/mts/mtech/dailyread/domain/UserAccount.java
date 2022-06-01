@@ -38,6 +38,7 @@ public class UserAccount implements Serializable {
   @GeneratedValue(
       generator = "daily_read_sequence",
       strategy = GenerationType.SEQUENCE)
+  @Column
   private Long id;
   @Column
   private String email;
@@ -60,8 +61,8 @@ public class UserAccount implements Serializable {
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
       return false;
     }
-    UserAccount userAccount = (UserAccount) o;
-    return id != null && Objects.equals(id, userAccount.id);
+    UserAccount that = (UserAccount) o;
+    return id != null && Objects.equals(id, that.id);
   }
 
   @Override

@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: daily-read-service
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost:8085
+  main:
+    allow-bean-definition-overriding: true
