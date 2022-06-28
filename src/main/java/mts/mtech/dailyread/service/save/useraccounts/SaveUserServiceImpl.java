@@ -1,4 +1,4 @@
-package mts.mtech.dailyread.service.save;
+package mts.mtech.dailyread.service.save.useraccounts;
 
 import mts.mtech.dailyread.domain.UserAccount;
 import mts.mtech.dailyread.persistence.UserAccountRepository;

@@ -1,7 +1,10 @@
 package mts.mtech.dailyread.persistence;
 
+import java.util.Optional;
 import mts.mtech.dailyread.domain.DailyRead;
+import mts.mtech.dailyread.domain.enums.Status;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DailyReadRepository extends BaseRepository<DailyRead>,
-    JpaSpecificationExecutor<DailyRead> {
+    JpaSpecificationExecutor<DailyRead>, PagingAndSortingRepository<DailyRead, Long> {
 
+  Optional<DailyRead> findByStatus(Status status);
 }

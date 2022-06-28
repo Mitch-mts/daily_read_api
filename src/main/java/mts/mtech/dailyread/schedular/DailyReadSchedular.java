@@ -5,7 +5,6 @@ import mts.mtech.dailyread.service.bibleverses.DailyReadService;
 import mts.mtech.dailyread.service.email.EmailRequest;
 import mts.mtech.dailyread.service.email.EmailService;
 import mts.mtech.dailyread.service.users.view.ViewUserService;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,16 +25,31 @@ public class DailyReadSchedular {
     this.emailService = emailService;
   }
 
-  @Scheduled(cron = "0 0 6,12,20 ? * * *")
+//  @Scheduled(cron = "0 0 6,12,20 ? * * *")
+//  @Scheduled(fixedDelay = 1000)
+//  public void sendDailyBibleReading(){
+//    log.info("sending daily bible reading");
+//    viewUserService.getUserList().forEach(users -> {
+//      EmailRequest emailRequest = EmailRequest.builder()
+//                                  .email(users.getEmail())
+//                                  .firstname(users.getFirstname())
+//                                  .lastname(users.getLastname())
+//                                  .dailyRead(dailyReadService.getDailyVerse())
+//                                  .build();
+//      emailService.sendEmail(emailRequest);
+//    });
+//  }
+
+//  @Scheduled(fixedDelay = 2000)
   public void sendDailyBibleReading(){
     log.info("sending daily bible reading");
-    viewUserService.getUserList().stream().forEach(users -> {
+    viewUserService.getUserList().forEach(users -> {
       EmailRequest emailRequest = EmailRequest.builder()
-          .email(users.getEmail())
-          .firstname(users.getFirstname())
-          .lastname(users.getLastname())
-          .dailyRead(dailyReadService.getDailyVerse())
-          .build();
+                                  .email(users.getEmail())
+                                  .firstname(users.getFirstname())
+                                  .lastname(users.getLastname())
+                                  .dailyRead(dailyReadService.getBibleVerse())
+                                  .build();
       emailService.sendEmail(emailRequest);
     });
   }

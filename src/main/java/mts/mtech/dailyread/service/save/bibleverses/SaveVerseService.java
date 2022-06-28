@@ -1,4 +1,4 @@
-package mts.mtech.dailyread.service.save;
+package mts.mtech.dailyread.service.save.bibleverses;
 
 import mts.mtech.dailyread.domain.DailyRead;
 

@@ -15,8 +15,10 @@ import mts.mtech.dailyread.utils.Constants;
 import mts.mtech.dailyread.utils.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -31,8 +34,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @created 04/05/2022 - 8:17 PM
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping(path = "/users")
 @Slf4j
+@CrossOrigin
 public class UsersRestController {
   private final UserService userService;
   private final CreateUserService createUserService;
@@ -57,7 +61,7 @@ public class UsersRestController {
         UserAccountDto.of(createUserService.createUser(userRequest)));
   }
 
-  @PutMapping("/{id}")
+  @PutMapping(path = "/{id}")
   public Response<UserAccountDto> update(@PathVariable Long id, UserRequest userRequest){
     log.info("id: {}, userRequest: {}", id, userRequest);
     return new Response<UserAccountDto>().buildSuccessResponse(Constants.UPDATED,
@@ -65,9 +69,9 @@ public class UsersRestController {
   }
 
   @GetMapping
-  public Response<Page<UserAccountDto>> getAll(@PageableDefault Pageable pageable){
-    log.info("pagaeble:{}", pageable);
-    var userPage = viewUserService.getAllUsers(pageable)
+  public Response<Page<UserAccountDto>> getAll(@PageableDefault Pageable pageable, @RequestParam Integer pageNumber){
+    Pageable page = PageRequest.of(pageNumber, pageable.getPageSize());
+    var userPage = viewUserService.getAllUsers(page)
                                                 .stream()
                                                 .map(UserAccountDto::of)
                                                 .collect(
@@ -77,25 +81,25 @@ public class UsersRestController {
         new PageImpl<>(userPage));
   }
 
-  @GetMapping("/{id}")
+  @GetMapping(path = "/{id}")
   public Response<UserAccountDto> getById(@PathVariable Long id){
     return new Response<UserAccountDto>().buildSuccessResponse(Constants.SUCCESS,
         UserAccountDto.of(viewUserService.getUserById(id)));
   }
 
-  @GetMapping("/list")
+  @GetMapping(path = "/list")
   public Response<List<UserAccountDto>> getList(){
     return new Response<List<UserAccountDto>>().buildSuccessResponse(Constants.SUCCESS,
         UserAccountDto.of(viewUserService.getUserList()));
   }
 
-  @DeleteMapping("{id}")
+  @DeleteMapping(path = "{id}")
   public MessageResponse delete(@PathVariable Long id){
     log.info("delete id: {}", id);
     return new MessageResponse(Constants.DELETED, userService.deleteUser(id));
   }
 
-  @PutMapping("activate-deactivate/{id}")
+  @PutMapping(path = "activate-deactivate/{id}")
   public Response<UserAccountDto> activateDeactivate(@PathVariable Long id){
     log.info("activating/deactivating : {}", id);
     return new Response<UserAccountDto>().buildSuccessResponse(Constants.SUCCESS,

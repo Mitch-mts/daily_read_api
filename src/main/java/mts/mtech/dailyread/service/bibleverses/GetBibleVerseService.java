@@ -4,9 +4,9 @@ import mts.mtech.dailyread.domain.DailyRead;
 
 /**
  * @author Mitchell Tawanda Severa
- * @created 10/05/2022 - 10:31 PM
+ * @created 08/06/2022 - 9:51 PM
  */
-@FunctionalInterface
-public interface BibleVerseApiService {
-  DailyRead getVerse(String url);
+
+public interface GetBibleVerseService {
+  DailyRead getBibleVerse();
 }

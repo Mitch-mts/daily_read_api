@@ -20,4 +20,5 @@ public interface Constants {
     String DELETED = "Record deleted successfully";
     String UPDATED = "Record updated successfully";
     String EMAIL_EXISTS = "Email already exists";
+    String NO_READING = "Sorry we do not have a bible reading for you today";
 }

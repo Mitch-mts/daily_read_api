@@ -2,12 +2,14 @@ package mts.mtech.dailyread.service.bibleverses;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import mts.mtech.dailyread.persistence.DailyReadRepository;
 import mts.mtech.errorhandling.exception.SystemErrorException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
@@ -17,11 +19,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class DailyReadServiceImplTest {
   private DailyReadServiceImpl underTest;
+  @Mock
   private BibleVerseApiService bibleVerseApiService;
+  private DailyReadRepository dailyReadRepository;
 
   @BeforeEach
   void setUp() {
-    underTest = new DailyReadServiceImpl(bibleVerseApiService);
+    underTest = new DailyReadServiceImpl(bibleVerseApiService, dailyReadRepository);
   }
 
 

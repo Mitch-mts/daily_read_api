@@ -10,4 +10,5 @@ import mts.mtech.dailyread.domain.DailyRead;
 public interface DailyReadService {
   DailyRead getDailyVerse();
   DailyRead getRandomVerse();
+  DailyRead getBibleVerse();
 }

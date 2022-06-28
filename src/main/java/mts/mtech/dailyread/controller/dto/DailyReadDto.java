@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import mts.mtech.dailyread.domain.DailyRead;
 
 /**
@@ -15,7 +14,6 @@ import mts.mtech.dailyread.domain.DailyRead;
 @NoArgsConstructor
 @Data
 @Builder
-@ToString
 public class DailyReadDto {
   private Long id;
   private String reading;

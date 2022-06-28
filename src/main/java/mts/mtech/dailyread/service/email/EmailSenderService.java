@@ -8,4 +8,5 @@ package mts.mtech.dailyread.service.email;
 
 public interface EmailSenderService {
     void sendNotification(Notification notification);
+    void sendEmailNotification(Notification notification);
 }

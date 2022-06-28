@@ -10,6 +10,7 @@ services:
     container_name: daily_read_app
     depends_on:
       - db
+#      - config-server
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/daily_read
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -23,3 +24,11 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=BigMitch@123
       - POSTGRES_DB=daily_read
+
+#  config-server:
+#    image: 'config-server'
+#    container_name: config_server
+#    build:
+#      context: .
+#    ports:
+#      - "8085:8085"
