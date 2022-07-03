@@ -21,7 +21,7 @@ public class DailyReadDto {
   private String chapter;
   private String book;
   private String testament;
-  @JsonFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern = "yyyy-MMM-dd")
   private LocalDate dateCreated;
 
   private DailyReadDto(Long id, String reading, String verse, String chapter, String book,
