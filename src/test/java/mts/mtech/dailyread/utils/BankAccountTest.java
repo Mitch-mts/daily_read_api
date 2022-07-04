@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +39,8 @@ class BankAccountTest {
   void testDeposit() {
     BankAccount bankAccount = new BankAccount(400, 0);
     bankAccount.deposit(500);
-    assertEquals(900, bankAccount.getBalance());
+    //message is displayed if test fails
+    assertEquals(900, bankAccount.getBalance(), "Unexpected Value provided");
   }
 
   @Test
@@ -80,6 +82,13 @@ class BankAccountTest {
 
   @Test
   public void testDepositTimeout(){
+    BankAccount bankAccount =  new BankAccount(500, 0);
+    assertTimeout(Duration.ofNanos(10), () -> bankAccount.deposit(100));
+  }
+
+  @Test
+  @Disabled("Test temporarily disabled due to maintainance")
+  public void testDisabled(){
     BankAccount bankAccount =  new BankAccount(500, 0);
     assertTimeout(Duration.ofNanos(10), () -> bankAccount.deposit(100));
   }
