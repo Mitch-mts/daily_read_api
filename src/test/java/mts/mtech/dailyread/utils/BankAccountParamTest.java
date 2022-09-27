@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.DayOfWeek;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,6 +29,7 @@ public class BankAccountParamTest {
   }
 
   @ParameterizedTest
+  @Disabled
   @CsvFileSource(resources = "data.csv", delimiter = ';')
   public void testDepositAndName(double amount, String name, BankAccount bankAccount){
     bankAccount.deposit(amount);

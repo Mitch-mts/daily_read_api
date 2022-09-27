@@ -12,14 +12,4 @@ import org.junit.jupiter.api.Test;
  */
 
 class DailyReadSchedularTest {
-  private
-
-  @BeforeEach
-  void setUp() {
-  }
-
-  @Test
-  @Disabled
-  void sendDailyBibleReading() {
-  }
 }

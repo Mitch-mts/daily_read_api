@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -26,6 +27,7 @@ public class BankAccountLifeCycleTest {
   }
 
   @Test
+  @Disabled
   public void testWithdrawal(){
     bankAccount.withdraw(300);
     assertEquals(200, bankAccount.getBalance());
