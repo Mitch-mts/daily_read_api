@@ -2,9 +2,9 @@ package mts.mtech.dailyread.service.bibleverses;
 
 import mts.mtech.dailyread.domain.DailyRead;
 import mts.mtech.dailyread.domain.enums.Status;
+import mts.mtech.dailyread.exception.RecordNotFoundException;
 import mts.mtech.dailyread.persistence.DailyReadRepository;
 import mts.mtech.dailyread.utils.Constants;
-import mts.mtech.errorhandling.exception.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,7 @@
 package mts.mtech.dailyread.service.bibleverses;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
+import mts.mtech.dailyread.exception.SystemErrorException;
 import mts.mtech.dailyread.persistence.DailyReadRepository;
-import mts.mtech.errorhandling.exception.SystemErrorException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * @author Mitchell Tawanda Severa
@@ -21,6 +22,7 @@ class DailyReadServiceImplTest {
   private DailyReadServiceImpl underTest;
   @Mock
   private BibleVerseApiService bibleVerseApiService;
+  @Autowired
   private DailyReadRepository dailyReadRepository;
 
   @BeforeEach

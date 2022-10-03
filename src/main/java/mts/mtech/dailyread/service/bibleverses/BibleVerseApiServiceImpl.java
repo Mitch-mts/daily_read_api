@@ -1,17 +1,18 @@
 package mts.mtech.dailyread.service.bibleverses;
 
-import java.time.LocalDate;
 import lombok.extern.slf4j.Slf4j;
 import mts.mtech.dailyread.api.ApiResponse;
 import mts.mtech.dailyread.domain.DailyRead;
 import mts.mtech.dailyread.domain.enums.Status;
+import mts.mtech.dailyread.exception.RecordNotFoundException;
+import mts.mtech.dailyread.exception.SystemErrorException;
 import mts.mtech.dailyread.service.save.bibleverses.SaveVerseService;
 import mts.mtech.dailyread.utils.Constants;
-import mts.mtech.errorhandling.exception.RecordNotFoundException;
-import mts.mtech.errorhandling.exception.SystemErrorException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.time.LocalDate;
 
 /**
  * @author Mitchell Tawanda Severa

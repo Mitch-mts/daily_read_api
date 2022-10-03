@@ -1,11 +1,11 @@
 package mts.mtech.dailyread.service.users.update;
 
 import mts.mtech.dailyread.domain.UserAccount;
+import mts.mtech.dailyread.exception.RecordNotFoundException;
 import mts.mtech.dailyread.persistence.UserAccountRepository;
 import mts.mtech.dailyread.service.save.useraccounts.SaveUserService;
 import mts.mtech.dailyread.service.users.UserRequest;
 import mts.mtech.dailyread.utils.Constants;
-import mts.mtech.errorhandling.exception.RecordNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
