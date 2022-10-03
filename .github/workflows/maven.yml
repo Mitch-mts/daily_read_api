@@ -3,12 +3,14 @@
 
 name: Java CI with Maven
 
+# events to trigger a workflow
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
+# workflow to execute
 jobs:
   build:
 
