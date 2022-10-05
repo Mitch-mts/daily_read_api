@@ -1,18 +1,12 @@
 package mts.mtech.dailyread.utils;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTimeout;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.Duration;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Mitchell Tawanda Severa
@@ -87,7 +81,7 @@ class BankAccountTest {
   }
 
   @Test
-  @Disabled("Test temporarily disabled due to maintainance")
+//  @Disabled("Test temporarily disabled due to maintainance")
   public void testDisabled(){
     BankAccount bankAccount =  new BankAccount(500, 0);
     assertTimeout(Duration.ofNanos(10), () -> bankAccount.deposit(100));
