@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 @ControllerAdvice(annotations = RestController.class)
 public class ExceptionHandlerController {
-
     @ExceptionHandler(InvalidRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody mts.mtech.dailyread.error.Error invalidRequestError(InvalidRequestException e) {
