@@ -31,4 +31,3 @@ spring:
 daily-read:
   random-verse: https://quotes.rest/bible/verse.json
   daily-verse: https://quotes.rest/bible/vod.json
-
