@@ -6,11 +6,7 @@ pipeline{
   environment{
     NEW_VERSION = '1.0.1'
   }
-  
-  //tools management
-  tools{
-    maven 'Maven'
-  }
+ 
   
   //param management
   parameters{
