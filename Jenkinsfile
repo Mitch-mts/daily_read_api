@@ -13,6 +13,13 @@ pipeline{
     string(name: 'VERSION', defaultValue: '1.0.1', description: 'version to deploy')
   }
   
+  
+  stages("clone project from repository"){
+    echo 'clone the repository'
+    deleteDir()
+    sh 'git clone https://github.com/Mitch-mts/daily_read.git'
+  }
+  
   stages{
     stage("build"){
       steps{
