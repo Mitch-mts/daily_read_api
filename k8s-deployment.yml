@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daily-read
+spec:
+  selector:
+    matchLabels:
+      app: daily-read
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: daily-read
+    spec:
+      containers:
+        - name: daily-read
+          image: daily-read
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8059
