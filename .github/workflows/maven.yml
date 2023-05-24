@@ -41,3 +41,11 @@ jobs:
         registry: docker.io
         username: ${{secrets.DOCKER_USERNAME}}
         password: ${{secrets.DOCKER_PASSWORD}}
+        
+    - name: Pull Docker image
+      run: |
+        docker pull bigmitcht/daily-read
+
+    - name: Run application
+      run: |
+        docker run --name daily_read -p 8069:8069 bigmitcht/daily-read
